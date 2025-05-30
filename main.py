@@ -4,10 +4,10 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
-# CORS: permitir conexión desde localhost
+# CORS: permitir conexión desde localhost (o cualquier origen)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=["*"],  # Puedes restringir a ["http://localhost:5173"]
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -34,16 +34,3 @@ def recomendar_ropa(temp: Temperatura):
     else:
         ropa = "Playera y pantaloneta"
     return {"recomendacion": ropa}
-
-
-from fastapi.middleware.cors import CORSMiddleware
-
-app = FastAPI()
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Solo permite tu app local
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
